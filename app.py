@@ -5,7 +5,7 @@ from flask_cors import CORS
 from email_service import send_email
 
 scheduler = BackgroundScheduler(daemon=True)
-scheduler.add_job(send_email, 'cron', day_of_week='tue', hour=19)
+scheduler.add_job(send_email, 'cron', day_of_week='tue', hour=20)  # server time is 2 hours behind Prague time
 scheduler.start()
 
 app = Flask(__name__)
@@ -21,4 +21,4 @@ def send_events_email():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(use_reloader=False)  # use_reloader=False prevent the scheduler from executing twice
